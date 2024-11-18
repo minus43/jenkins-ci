@@ -23,16 +23,18 @@ pipeline {
         }
         stage('Build Docker Image & Push to Docker Hub') {
             steps {
-                sh """
-                    # Docker Hub 로그인
-                    echo "${env.DOCKER_HUB_PASSWORD}" | docker login -u "${dockerHubUsername}" --password-stdin
-                    
-                    # Docker 이미지 빌드
-                    docker build -t ${dockerHubUsername}/${dockerHubRepository}:${currentBuild.number} .
-                    
-                    # Docker Hub로 푸시
-                    docker push ${dockerHubUsername}/${dockerHubRepository}:${currentBuild.number}
-                """
+                withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'DOCKER_HUB_PASSWORD')]) {
+                    sh """
+                        # Docker Hub 로그인
+                        echo "${DOCKER_HUB_PASSWORD}" | docker login -u "${dockerHubUsername}" --password-stdin
+                        
+                        # Docker 이미지 빌드
+                        docker build -t ${dockerHubUsername}/${dockerHubRepository}:${currentBuild.number} .
+                        
+                        # Docker Hub로 푸시
+                        docker push ${dockerHubUsername}/${dockerHubRepository}:${currentBuild.number}
+                    """
+                }
             }
         }
         stage('Deploy to AWS EC2 VM') {
