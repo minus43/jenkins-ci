@@ -3,7 +3,7 @@ def ecrLoginHelper="docker-credential-ecr-login"
 def region="ap-northeast-2"
 def ecrUrl="361769560582.dkr.ecr.ap-northeast-2.amazonaws.com"
 def repository="my-app-image"
-def deployHost = "15.164.242.97"
+def deployHost = "43.202.165.29"
 
 // 젠킨스의 선언형 파이프라인 정의부 시작 (그루비 언어)
 pipeline {
