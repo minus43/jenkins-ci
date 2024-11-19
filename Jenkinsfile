@@ -1,7 +1,7 @@
 // 필요한 변수를 선언할 수 있다. (내가 직접 선언하는 변수, 젠킨스 환경변수를 끌고 올 수 있음)
 def ecrLoginHelper="docker-credential-ecr-login"
 def region="ap-northeast-2"
-def ecrUrl="361769560582.dkr.ecr.ap-northeast-2.amazonaws.com/my-app-image"
+def ecrUrl="361769560582.dkr.ecr.ap-northeast-2.amazonaws.com"
 def repository="my-app-image"
 def deployHost = "15.164.242.97"
 
